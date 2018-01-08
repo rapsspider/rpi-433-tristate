@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (eq(argv[i], "-c", "--code") && argc > i+1) {
-      options.CODE = atoi(argv[i+1]);
+      options.CODE = argv[i+1];
     }
 
     if (eq(argv[i], "-pl", "--pulse-length") && argc > i+1) {
