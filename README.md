@@ -1,9 +1,9 @@
 # rpi-433
-[![npm version](https://badge.fury.io/js/rpi-433.svg)](http://badge.fury.io/js/rpi-433)
+[![npm version](https://badge.fury.io/js/rpi-433-tristate.svg)](http://badge.fury.io/js/rpi-433-tristate)
 
-[![NPM](https://nodei.co/npm/rpi-433.png?downloads=true)](https://nodei.co/npm/rpi-433/)
+[![NPM](https://nodei.co/npm/rpi-433-tristate.png?downloads=true)](https://nodei.co/npm/rpi-433-tristate/)
 
-Simple NodeJS module to send and receive decimal codes through 433Mhz device on RaspberryPI 2
+Simple NodeJS module receive decimal codes and send tristate signals through 433Mhz device on RaspberryPI 2
 
 ### Dependencies
 * wiringPi : https://projects.drogon.net/raspberry-pi/wiringpi/
@@ -21,7 +21,7 @@ root@raspberrypi:/home/pi/wiringPi/wiringPi# ./build
 ### Installation
 
 ```bash
-npm install rpi-433
+npm install rpi-433-tristate
 ```
 
 ### Usage
