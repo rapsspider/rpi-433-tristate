@@ -21,7 +21,7 @@ function EmitterTriState(options) {
 /**
  * Send a decimal code through 433Mhz (and return a promise).
  *
- * @param   code        Decimal code
+ * @param   code        TriState code
  * @param   [options]   Options to configure pin or pulseLength
  *                      options.pin           Pin on which send the code
  *                      options.pulseLength   Pulse length

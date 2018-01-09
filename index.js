@@ -1,7 +1,7 @@
 var _       = require('underscore'),
     Sniffer = require('./Sniffer'),
     Emitter = require('./Emitter');
-    Emitter = require('./EmitterTriState');
+    EmitterTriState = require('./EmitterTriState');
 module.exports = {
 
   /**
@@ -41,8 +41,17 @@ module.exports = {
     });
 
     return new Emitter(options);
+  },
 
-  }
+  /**
+   * Send a tristate code through 433Mhz (and return a promise).
+   *
+   * @param   [options]   Options to configure pin or pulseLength
+   *                      options.pin           Pin on which send the code
+   *                      options.pulseLength   Pulse length
+   *
+   * @return  Function    Function used to send codes
+   */
   emitterTriState: function (options) {
 
     _.defaults(options, {

@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
     Options():  PIN(0),
                 CODE(""),
                 CODE_DEC(0),
-                PULSE_LENGTH(350),
+                PULSE_LENGTH(300),
                 TRI(false)
                 {};
 
