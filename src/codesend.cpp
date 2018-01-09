@@ -18,12 +18,14 @@ int main(int argc, char *argv[]) {
   struct Options {
 
     int PIN;
-    int CODE;
+    char* CODE;
     int PULSE_LENGTH;
+    bool TRI;
 
     Options():  PIN(0),
-                CODE(0),
-                PULSE_LENGTH(350)
+                CODE(char [20]),
+                PULSE_LENGTH(350),
+                TRI(false)
                 {};
 
   } options;
@@ -48,6 +50,12 @@ int main(int argc, char *argv[]) {
       options.PULSE_LENGTH = atoi(argv[i+1]);
     }
 
+    if (eq(argv[i], "-t", "--tri-state") && argc > i) {
+        options.TRI = true;
+        options.CODE = atoi(options.CODE);
+    }
+
+
   }
 
 
@@ -55,9 +63,13 @@ int main(int argc, char *argv[]) {
   RCSwitch mySwitch = RCSwitch();
   mySwitch.enableTransmit(options.PIN);
   mySwitch.setPulseLength(options.PULSE_LENGTH);
-  mySwitch.sendTriState(options.CODE, 24);
-
-  printf("code: %i, pin: %i, pulseLength: %i\n", options.CODE, options.PIN, options.PULSE_LENGTH);
+  if(options.TRI){
+      mySwitch.sendTriState(options.CODE;
+      printf("TriState code: %i, pin: %i, pulseLength: %i\n", options.CODE, options.PIN, options.PULSE_LENGTH);
+  }else{
+      mySwitch.send(options.CODE, 24);
+      printf("code: %i, pin: %i, pulseLength: %i\n", options.CODE, options.PIN, options.PULSE_LENGTH);
+  }
 
   return 0;
 
