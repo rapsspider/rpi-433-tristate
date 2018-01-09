@@ -87,10 +87,9 @@ EmitterTriState.prototype.sendCode = function (code, options, callback) {
 
   //Send the code
   exec([path.join(__dirname, Emitter.SCRIPT),
-    '--code',         code,
     '--pin',          options.pin,
     '--pulse-length', options.pulseLength,
-    '--tri-state'
+    '--tri-state', code
   ].join(' '), function (error, stdout, stderr) {
 
     error = error || stderr;

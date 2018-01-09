@@ -19,11 +19,13 @@ int main(int argc, char *argv[]) {
 
     int PIN;
     char* CODE;
+    int CODE_DEC;
     int PULSE_LENGTH;
     bool TRI;
 
     Options():  PIN(0),
-                CODE(char [20]),
+                CODE(""),
+                CODE_DEC(0),
                 PULSE_LENGTH(350),
                 TRI(false)
                 {};
@@ -43,16 +45,16 @@ int main(int argc, char *argv[]) {
     }
 
     if (eq(argv[i], "-c", "--code") && argc > i+1) {
-      options.CODE = argv[i+1];
+      options.CODE_DEC = atoi(argv[i+1]);
     }
 
     if (eq(argv[i], "-pl", "--pulse-length") && argc > i+1) {
       options.PULSE_LENGTH = atoi(argv[i+1]);
     }
 
-    if (eq(argv[i], "-t", "--tri-state") && argc > i) {
+    if (eq(argv[i], "-t", "--tri-state") && argc > i+1) {
         options.TRI = true;
-        options.CODE = atoi(options.CODE);
+        options.CODE = argv[i+1];
     }
 
 
@@ -64,10 +66,10 @@ int main(int argc, char *argv[]) {
   mySwitch.enableTransmit(options.PIN);
   mySwitch.setPulseLength(options.PULSE_LENGTH);
   if(options.TRI){
-      mySwitch.sendTriState(options.CODE;
+      mySwitch.sendTriState(options.CODE);
       printf("TriState code: %i, pin: %i, pulseLength: %i\n", options.CODE, options.PIN, options.PULSE_LENGTH);
   }else{
-      mySwitch.send(options.CODE, 24);
+      mySwitch.send(options.CODE_DEC, 24);
       printf("code: %i, pin: %i, pulseLength: %i\n", options.CODE, options.PIN, options.PULSE_LENGTH);
   }
 
