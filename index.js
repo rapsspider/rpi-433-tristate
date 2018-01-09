@@ -1,7 +1,7 @@
 var _       = require('underscore'),
     Sniffer = require('./Sniffer'),
     Emitter = require('./Emitter');
-
+    Emitter = require('./EmitterTriState');
 module.exports = {
 
   /**
@@ -19,7 +19,7 @@ module.exports = {
       pin: 2,
       debounceDelay: 500
     });
-    
+
     return Sniffer.getInstance(options);
 
   },
@@ -30,18 +30,28 @@ module.exports = {
    * @param   [options]   Options to configure pin or pulseLength
    *                      options.pin           Pin on which send the code
    *                      options.pulseLength   Pulse length
-   * 
+   *
    * @return  Function    Function used to send codes
    */
   emitter: function (options) {
-    
+
     _.defaults(options, {
       pin: 0,
       pulseLength: 350
     });
-    
+
     return new Emitter(options);
-    
+
+  }
+  emitterTriState: function (options) {
+
+    _.defaults(options, {
+      pin: 0,
+      pulseLength: 350
+    });
+
+    return new EmitterTriState(options);
+
   }
 
 };
