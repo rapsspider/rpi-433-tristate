@@ -1,7 +1,7 @@
 # rpi-433
-[![npm version](https://badge.fury.io/js/rpi-433-tristate.svg)](http://badge.fury.io/js/rpi-433-tristate)
+[![npm version](https://badge.fury.io/js/rpi-433.svg)](http://badge.fury.io/js/rpi-433)
 
-[![NPM](https://nodei.co/npm/rpi-433-tristate.png?downloads=true)](https://nodei.co/npm/rpi-433-tristate/)
+[![NPM](https://nodei.co/npm/rpi-433.png?downloads=true)](https://nodei.co/npm/rpi-433/)
 
 Simple NodeJS module receive decimal codes and send tristate signals through 433Mhz device on RaspberryPI 2
 
@@ -21,7 +21,7 @@ root@raspberrypi:/home/pi/wiringPi/wiringPi# ./build
 ### Installation
 
 ```bash
-npm install rpi-433-tristate
+npm install rpi-433
 ```
 
 ### Usage
@@ -44,12 +44,15 @@ var rpi433    = require('rpi-433'),
     rfSniffer = rpi433.sniffer({
       pin: 2,                     //Snif on GPIO 2 (or Physical PIN 13)
       debounceDelay: 500          //Wait 500ms before reading another code
-    }),
+    });
     rfEmitter = rpi433.emitter({
       pin: 0,                     //Send through GPIO 0 (or Physical PIN 11)
       pulseLength: 350            //Send the code with a 350 pulse length
     });
-
+    rfEmitterTri = rpi.433.emitterTriState({
+        pin: 0,                   //Equal to above
+        pulseLength: 300
+    })
 // Receive (data is like {code: xxx, pulseLength: xxx})
 rfSniffer.on('data', function (data) {
   console.log('Code received: '+data.code+' pulse length : '+data.pulseLength);
@@ -58,6 +61,11 @@ rfSniffer.on('data', function (data) {
 // Send
 rfEmitter.sendCode(1234, function(error, stdout) {   //Send 1234
   if(!error) console.log(stdout); //Should display 1234
+});
+
+// Send TriState signal
+rfEmitterTri.sendCode("FF0FFFFF00F0", function(error, stdout) {
+    if(!error) console.log(stdout);
 });
 
 /* Or :
