@@ -86,7 +86,7 @@ EmitterTriState.prototype.sendCode = function (code, options, callback) {
   }
 
   //Send the code
-  exec([path.join(__dirname, EmitterTriState.SCRIPT),
+  exec([path.join(__dirname, Emitter.SCRIPT),
     '--pin',          options.pin,
     '--pulse-length', options.pulseLength,
     '--tri-state', code
