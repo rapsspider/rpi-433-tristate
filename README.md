@@ -1,7 +1,7 @@
-# rpi-433
-[![npm version](https://badge.fury.io/js/rpi-433.svg)](http://badge.fury.io/js/rpi-433)
+# rpi-433-tristate
+[![npm version](https://badge.fury.io/js/rpi-433-tristate.svg)](http://badge.fury.io/js/rpi-433-tristate)
 
-[![NPM](https://nodei.co/npm/rpi-433.png?downloads=true)](https://nodei.co/npm/rpi-433/)
+[![NPM](https://nodei.co/npm/rpi-433-tristate.png?downloads=true)](https://nodei.co/npm/rpi-433-tristate/)
 
 Simple NodeJS module receive decimal codes and send tristate signals through 433Mhz device on RaspberryPI 2
 
@@ -21,7 +21,7 @@ root@raspberrypi:/home/pi/wiringPi/wiringPi# ./build
 ### Installation
 
 ```bash
-npm install rpi-433
+npm install rpi-433-tristate
 ```
 
 ### Usage
@@ -40,7 +40,7 @@ gpio readall
 ### Example
 
 ```js
-var rpi433    = require('rpi-433'),
+var rpi433    = require('rpi-433-tristate'),
     rfSniffer = rpi433.sniffer({
       pin: 2,                     //Snif on GPIO 2 (or Physical PIN 13)
       debounceDelay: 500          //Wait 500ms before reading another code
