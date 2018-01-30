@@ -1,7 +1,7 @@
 {
-  "name": "rpi-433",
-  "version": "2.2.0",
-  "description": "Simple NodeJS module to send and receive decimal codes through 433Mhz device on RaspberryPI 2",
+  "name": "rpi-433-tristate",
+  "version": "2.3.0",
+  "description": "Simple NodeJS module to send and receive decimal/tristate codes through 433Mhz device on RaspberryPI",
   "main": "index.js",
   "dependencies": {
     "q": "^1.4.1",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:eroak/rpi-433.git"
+    "url": "git@github.com:tillepille/rpi-433-tristate.git"
   },
   "devDependencies": {},
   "scripts": {
@@ -35,8 +35,8 @@
     "gpio"
   ],
   "author": {
-    "name": "eroak",
-    "email": "mr.eroak@gmail.com"
+    "name": "tillepille",
+    "email": "tl@mindlink.de"
   },
   "license": "ISC"
 }
