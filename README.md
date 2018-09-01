@@ -5,6 +5,9 @@
 
 Simple NodeJS module receive decimal codes and send tristate signals through 433Mhz device on RaspberryPI 2
 
+## Disclaimer
+It's a fork from eroak but my PR got no attention. So i made my own package.
+
 ### Dependencies
 * wiringPi : https://projects.drogon.net/raspberry-pi/wiringpi/
 
@@ -49,7 +52,7 @@ var rpi433    = require('rpi-433-tristate'),
       pin: 0,                     //Send through GPIO 0 (or Physical PIN 11)
       pulseLength: 350            //Send the code with a 350 pulse length
     });
-    rfEmitterTri = rpi.433.emitterTriState({
+    rfEmitterTri = rpi433.emitterTriState({
         pin: 0,                   //Equal to above
         pulseLength: 300
     })

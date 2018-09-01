@@ -1,6 +1,6 @@
 {
   "name": "rpi-433-tristate",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "Simple NodeJS module to send and receive decimal/tristate codes through 433Mhz device on RaspberryPI",
   "main": "index.js",
   "dependencies": {
