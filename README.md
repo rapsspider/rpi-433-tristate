@@ -1,4 +1,5 @@
 # rpi-433-tristate
+
 [![npm version](https://badge.fury.io/js/rpi-433-tristate.svg)](http://badge.fury.io/js/rpi-433-tristate)
 
 [![NPM](https://nodei.co/npm/rpi-433-tristate.png?downloads=true)](https://nodei.co/npm/rpi-433-tristate/)
@@ -6,12 +7,15 @@
 Simple NodeJS module receive decimal codes and send tristate signals through 433Mhz device on RaspberryPI 2
 
 ## Disclaimer
-It's a fork from eroak but my PR got no attention. So i made my own package.
+
+Forked from eroak, just added my feature to the code and to the readme.
 
 ### Dependencies
+
 * wiringPi : https://projects.drogon.net/raspberry-pi/wiringpi/
 
 ### Building WiringPi
+
 ```bash
 pi@raspberrypi ~ $ git clone git://git.drogon.net/wiringPi
 ...
@@ -28,6 +32,7 @@ npm install rpi-433-tristate
 ```
 
 ### Usage
+
 Firstly, make sure you are running your application as root or with sudo, else the Raspberry Pi will not let you output/input to the GPIO and you'll get an error.
 ```bash
 sudo node myscript.js
@@ -39,13 +44,12 @@ Please note that there are different and confusing ways to reference a channel. 
 gpio readall
 ```
 
-
 ### Example
 
 ```js
 var rpi433    = require('rpi-433-tristate'),
     rfSniffer = rpi433.sniffer({
-      pin: 2,                     //Snif on GPIO 2 (or Physical PIN 13)
+      pin: 2,                     //Sniff on GPIO 2 (or Physical PIN 13)
       debounceDelay: 500          //Wait 500ms before reading another code
     });
     rfEmitter = rpi433.emitter({
