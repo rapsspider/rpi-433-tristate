@@ -1,7 +1,7 @@
-var _       = require('underscore'),
-    Sniffer = require('./Sniffer'),
-    Emitter = require('./Emitter');
-    EmitterTriState = require('./EmitterTriState');
+const   Sniffer = require('./Sniffer'),
+        Emitter = require('./Emitter'),
+        EmitterTriState = require('./EmitterTriState')
+
 module.exports = {
 
   /**
@@ -13,19 +13,24 @@ module.exports = {
    *
    * @return  Sniffer   Sniffer instance (singleton)
    */
+  snifferOpts:{
+    pin: 2,
+    debounceDelay: 500
+  },
+  emitterOpts: {
+    pin: 0,
+    pulseLength: 350
+  }, 
+  
   sniffer: function (options) {
-
-    _.defaults(options, {
-      pin: 2,
-      debounceDelay: 500
-    });
-
-    return Sniffer.getInstance(options);
-
+    if(!options){
+      options = this.snifferOpts
+    }
+    return Sniffer.getInstance(options)
   },
 
   /**
-   * Send a decimal code through 433Mhz (and return a promise).
+   * Send a code through 433Mhz (and return a promise).
    *
    * @param   [options]   Options to configure pin or pulseLength
    *                      options.pin           Pin on which send the code
@@ -34,33 +39,16 @@ module.exports = {
    * @return  Function    Function used to send codes
    */
   emitter: function (options) {
-
-    _.defaults(options, {
-      pin: 0,
-      pulseLength: 350
-    });
-
-    return new Emitter(options);
+    if(!options){
+      options = this.emitterOpts
+    }
+    return new Emitter(options)
   },
 
-  /**
-   * Send a tristate code through 433Mhz (and return a promise).
-   *
-   * @param   [options]   Options to configure pin or pulseLength
-   *                      options.pin           Pin on which send the code
-   *                      options.pulseLength   Pulse length
-   *
-   * @return  Function    Function used to send codes
-   */
   emitterTriState: function (options) {
-
-    _.defaults(options, {
-      pin: 0,
-      pulseLength: 350
-    });
-
-    return new EmitterTriState(options);
-
+    if(!options){
+      options = this.emitterOpts
+    }
+    return new EmitterTriState(options)
   }
-
-};
+}
