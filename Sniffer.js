@@ -1,24 +1,22 @@
 const _ = require('underscore');
 const util = require('util');
 const path = require('path');
-const spawn = require('child_process').spawn;
-const EventEmitter = require('events').EventEmitter;
+const spawn = require('child_process').spawn
+const EventEmitter = require('events').EventEmitter
 
-module.exports = Sniffer;
+module.exports = Sniffer
 
-Sniffer.SCRIPT = 'build/RFSniffer';
-Sniffer.process = null;
-Sniffer.instance = null;
+Sniffer.SCRIPT = 'build/RFSniffer'
+Sniffer.process = null
+Sniffer.instance = null
 
 function Sniffer(options) {
-
-    EventEmitter.call(this);
-
+    EventEmitter.call(this)
     //Launch Sniffer
     Sniffer.process = spawn(
         path.join(__dirname, Sniffer.SCRIPT), [
             '--pin', options.pin
-        ]);
+        ])
 
     //Emit data received
     Sniffer.process.stdout.on(
@@ -28,43 +26,33 @@ function Sniffer(options) {
             options.debounceDelay,
             true
         )
-    );
+    )
 
     //Emit error messages
     Sniffer.process.stderr.on(
         'data',
         this.onError.bind(this)
-    );
+    )
+}
 
-};
-
-util.inherits(Sniffer, EventEmitter);
+util.inherits(Sniffer, EventEmitter)
 
 Sniffer.getInstance = function(options) {
-
-    return Sniffer.instance || (Sniffer.instance = new Sniffer(options));
-
-};
+    return Sniffer.instance || (Sniffer.instance = new Sniffer(options))
+}
 
 Sniffer.prototype.onError = function(error) {
-
     this.emit('error', error);
-
-};
+}
 
 Sniffer.prototype.onData = function(buffer) {
-
-    this.emit('data', JSON.parse(buffer));
-
-};
+    this.emit('data', JSON.parse(buffer))
+}
 
 //Kill sniffer process when exit
 process.on('SIGINT', function() {
-
     if (!!Sniffer.process) {
-        Sniffer.process.kill();
+        Sniffer.process.kill()
     }
-
-    process.exit();
-
-});
+    process.exit()
+})
