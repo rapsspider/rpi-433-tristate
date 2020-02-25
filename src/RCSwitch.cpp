@@ -32,6 +32,7 @@ unsigned int RCSwitch::nReceivedDelay = 0;
 unsigned int RCSwitch::nReceivedProtocol = 0;
 unsigned int RCSwitch::timings[RCSWITCH_MAX_CHANGES];
 int RCSwitch::nReceiveTolerance = 60;
+char nulStr[0] = { '\0' };
 
 RCSwitch::RCSwitch() {
   this->nReceiverInterrupt = -1;
@@ -193,7 +194,7 @@ char* RCSwitch::getCodeWordB(int nAddressCode, int nChannelCode, boolean bStatus
    
    const char* code[5] = { "FFFF", "0FFF", "F0FF", "FF0F", "FFF0" };
    if (nAddressCode < 1 || nAddressCode > 4 || nChannelCode < 1 || nChannelCode > 4) {
-    return '\0';
+    return nulStr;
    }
    for (int i = 0; i<4; i++) {
      sReturn[nReturnPos++] = code[nAddressCode][i];
@@ -213,7 +214,7 @@ char* RCSwitch::getCodeWordB(int nAddressCode, int nChannelCode, boolean bStatus
       sReturn[nReturnPos++] = '0';
    }
    
-   sReturn[nReturnPos] = '\0';
+   sReturn[nReturnPos] = nulStr[0];
    
    return sReturn;
 }
@@ -229,7 +230,7 @@ char* RCSwitch::getCodeWordA(char* sGroup, int nChannelCode, boolean bStatus) {
   const char* code[6] = { "FFFFF", "0FFFF", "F0FFF", "FF0FF", "FFF0F", "FFFF0" };
 
   if (nChannelCode < 1 || nChannelCode > 5) {
-      return '\0';
+      return nulStr;
   }
   
   for (int i = 0; i<5; i++) {
@@ -238,7 +239,7 @@ char* RCSwitch::getCodeWordA(char* sGroup, int nChannelCode, boolean bStatus) {
     } else if (sGroup[i] == '1') {
       sReturn[nReturnPos++] = '0';
     } else {
-      return '\0';
+      return nulStr;
     }
   }
   
@@ -253,7 +254,7 @@ char* RCSwitch::getCodeWordA(char* sGroup, int nChannelCode, boolean bStatus) {
     sReturn[nReturnPos++] = 'F';
     sReturn[nReturnPos++] = '0';
   }
-  sReturn[nReturnPos] = '\0';
+  sReturn[nReturnPos] = nulStr[0];
 
   return sReturn;
 }
@@ -266,7 +267,7 @@ char* RCSwitch::getCodeWordC(char sFamily, int nGroup, int nDevice, boolean bSta
   int nReturnPos = 0;
   
   if ( (byte)sFamily < 97 || (byte)sFamily > 112 || nGroup < 1 || nGroup > 4 || nDevice < 1 || nDevice > 4) {
-    return '\0';
+    return nulStr;
   }
   
   char* sDeviceGroupCode =  dec2binWzerofill(  (nDevice-1) + (nGroup-1)*4, 4  );
@@ -285,7 +286,7 @@ char* RCSwitch::getCodeWordC(char sFamily, int nGroup, int nDevice, boolean bSta
   } else {
     sReturn[nReturnPos++] = '0';
   }
-  sReturn[nReturnPos] = '\0';
+  sReturn[nReturnPos] = nulStr[0];
   return sReturn;
 }
 
@@ -296,7 +297,7 @@ char* RCSwitch::getCodeWordC(char sFamily, int nGroup, int nDevice, boolean bSta
 void RCSwitch::sendTriState(char* sCodeWord) {
   for (int nRepeat=0; nRepeat<nRepeatTransmit; nRepeat++) {
     int i = 0;
-    while (sCodeWord[i] != '\0') {
+    while (sCodeWord[i] != nulStr[0]) {
       switch(sCodeWord[i]) {
         case '0':
           this->sendT0();
